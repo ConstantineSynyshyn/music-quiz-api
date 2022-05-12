@@ -1,6 +1,12 @@
 const fastify = require("fastify")({
   logger: true,
 })
+// Import Swagger Options
+const swagger = require("../config/swagger")
+
+// Register Swagger
+fastify.register(require("fastify-swagger"), swagger.options)
+fastify.register(require("@fastify/cors"))
 
 const routes = require("./routes")
 
@@ -25,7 +31,8 @@ fastify.get("/", async (request, reply) => {
 const start = async () => {
   try {
     await fastify.listen(3000)
-    fastify.log.info(`server listening on ${fastify.server.address().port}`)
+    fastify.swagger()
+    fastify.log.info(`listening on ${fastify.server.address().port}`)
   } catch (err) {
     fastify.log.error(err)
     process.exit(1)
