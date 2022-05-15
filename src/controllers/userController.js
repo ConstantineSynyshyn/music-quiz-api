@@ -1,6 +1,7 @@
 const boom = require("boom")
 
 const User = require("../models/User")
+const Question = require("../models/Question")
 
 exports.createUser = async (req, reply) => {
   try {
@@ -28,14 +29,15 @@ exports.updateUserAnswer = async (req, reply) => {
     const answeredQuestion = await Question.findOne({ question_id: questionId })
 
     const isCorrect =
-      answeredQuestion.options.find((option) => option.isCorrect) === answer
+      answeredQuestion.options.find((option) => option.is_correct).answer ===
+      answer
 
     const user = await User.findByIdAndUpdate(userId, {
       $push: {
         answers: {
-          questionId,
+          question_id: questionId,
           answer,
-          isCorrect,
+          is_correct: isCorrect,
         },
       },
     })

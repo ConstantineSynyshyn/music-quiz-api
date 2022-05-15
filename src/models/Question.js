@@ -1,16 +1,17 @@
 const mongoose = require("mongoose")
 
-const quesstionSchema = new mongoose.Schema({
+const questionSchema = new mongoose.Schema({
   question_id: String,
-  question: String,
   genre_name: String,
+  audio_src: String,
+  video_src: String,
   options: [
     {
-      value: String,
+      answer: String,
       description: String,
-      isCorrect: Boolean,
+      is_correct: Boolean,
     },
   ],
 })
 
-module.exports = mongoose.model("Question", quesstionSchema)
+module.exports = mongoose.model("Question", questionSchema)

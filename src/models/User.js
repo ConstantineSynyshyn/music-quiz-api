@@ -5,9 +5,9 @@ const userSchema = new mongoose.Schema({
   score: Number,
   answers: [
     {
-      questionId: String,
-      answer: Number,
-      isCorrect: Boolean,
+      question_id: String,
+      answer: String,
+      is_correct: Boolean,
     },
   ],
 })

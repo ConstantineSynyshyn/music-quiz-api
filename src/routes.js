@@ -10,7 +10,7 @@ const routes = [
   },
   {
     method: "GET",
-    url: "/question/:questionId",
+    url: "/question/:genreName",
     handler: questionController.getQuestionByGenre,
   },
   {
