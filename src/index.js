@@ -15,18 +15,13 @@ const mongoose = require("mongoose")
 routes.forEach((route) => {
   fastify.route(route)
 })
-
-const mongoUri =
-  "mongodb+srv://admin:pepGGdNuSDq8su8U@cluster0.wt7hq.mongodb.net/music-quiz?retryWrites=true&w=majority"
+const adminCreds = process.env.ADMIN_CREDS
+const mongoUri = `mongodb+srv://admin:${adminCreds}@cluster0.wt7hq.mongodb.net/music-quiz?retryWrites=true&w=majority`
 
 mongoose
   .connect(mongoUri)
   .then(() => console.log("MongoDB connected…"))
   .catch((err) => console.log(err))
-
-fastify.get("/", async (request, reply) => {
-  return { hello: "world" }
-})
 
 const start = async () => {
   try {
